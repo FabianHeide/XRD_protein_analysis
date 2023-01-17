@@ -6,5 +6,5 @@ the data, calculate a few interesting protein properties and continue into an ex
 available protein models.
 
 
-Note: I am actively working on this project. If you have any comments or suggestions, do not hesitate to contact 
+Note: I am actively working on this project. If you have any comments or suggestions, do not <i>hesitate</i> to contact 
 me. This includes inquiries on the written code and any suggestions for potential protein analyses.
