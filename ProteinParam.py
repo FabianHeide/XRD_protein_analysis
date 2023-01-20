@@ -1,5 +1,8 @@
 #Various analysis classes and functions for the generation of additional properties from a given protein amino acid sequence
 
+import Bio
+from Bio.SeqUtils import ProtParam
+
 #Amino acid groupings
 amino_acids = ['A','R','N','D','C','Q','E','G','H','I','L','K','M','F','P','O','S','T','W','Y','V']
 hpho_res = ['A','G','F','I','L','M','P','V','W']
@@ -76,24 +79,27 @@ class ProteinProperties(SequenceAnalysis):
         ratio = float(hphilic_res/len(sequence))
         return ratio
 
+    #calculates the hydrophobic/hydrophilic ratio of the sequence
     def hydro_ratio(self, sequence):
         hphobic_res = self.hphobic_res(sequence)
         hphilic_res = self.hphilic_res(sequence)
         ratio = float(hphobic_res/hphilic_res)
         return ratio
 
+    #calculates the aromatic ratio of the entire sequence
     def aro_ratio(self, sequence):
         aro_res = self.aromatic_res(sequence)
         ratio = float(aro_res/len(sequence))
         return ratio
- 
+    
+    #calculates the isoelectric point of give sequence
     def isoelectric_point(self, sequence):
-        pka_values = {'D':3.65, 'E':4.25, 'K':10.53, 'R':12.48, 'H':6.0}
-        carboxy = {}
-        amino = {}
-        initial_ph = 7.0
-        aa_list = []
-        for i in sequence.upper():
-            if i == 'D' or i == 'E' or i == 'K' or i == 'R' or i == 'H':
-                aa_list = pka_values[i]
-                print(aa_list)
+        x = ProtParam.ProteinAnalysis(sequence)
+        pI = x.isoelectric_point()
+        return pI
+
+    #calculates the alipathic index of given sequence, higher index indicates a more stable protein
+    def alipathic_index(self, sequence):
+        sequence = sequence.upper()
+        ali_index = float(100*sequence.count('A')/len(sequence) + 2.9*(100*sequence.count('V')/len(sequence)) + 3.9*(100*sequence.count('I')/len(sequence) + 100*sequence.count('L')/len(sequence)))   
+        return ali_index
