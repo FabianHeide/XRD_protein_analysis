@@ -1,5 +1,6 @@
 #Various analysis classes and functions for the generation of additional properties from a given protein amino acid sequence
 
+#imports (biopython)
 import Bio
 from Bio.SeqUtils import ProtParam
 
@@ -101,5 +102,5 @@ class ProteinProperties(SequenceAnalysis):
     #calculates the alipathic index of given sequence, higher index indicates a more stable protein
     def alipathic_index(self, sequence):
         sequence = sequence.upper()
-        ali_index = float(100*sequence.count('A')/len(sequence) + 2.9*(100*sequence.count('V')/len(sequence)) + 3.9*(100*sequence.count('I')/len(sequence) + 100*sequence.count('L')/len(sequence)))   
+        ali_index = float(100*sequence.count('A')/len(sequence) + 2.9*(100*sequence.count('V')/len(sequence)) + 3.9*(100*sequence.count('I')/len(sequence) + 100*sequence.count('L')/len(sequence)))
         return ali_index
