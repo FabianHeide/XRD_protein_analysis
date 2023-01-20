@@ -10,3 +10,9 @@ structures and uses machine learning to determine the major determinants for pro
 
 Note: I am actively working on this project. If you have any comments or suggestions, do not hesitate to contact 
 me. This includes inquiries on the written code and any suggestions for potential protein analyses.
+
+Required Python packages:
+
+pandas
+biopython
+bokeh
