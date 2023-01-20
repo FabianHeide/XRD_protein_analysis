@@ -87,3 +87,13 @@ class ProteinProperties(SequenceAnalysis):
         ratio = float(aro_res/len(sequence))
         return ratio
  
+    def isoelectric_point(self, sequence):
+        pka_values = {'D':3.65, 'E':4.25, 'K':10.53, 'R':12.48, 'H':6.0}
+        carboxy = {}
+        amino = {}
+        initial_ph = 7.0
+        aa_list = []
+        for i in sequence.upper():
+            if i == 'D' or i == 'E' or i == 'K' or i == 'R' or i == 'H':
+                aa_list = pka_values[i]
+                print(aa_list)
