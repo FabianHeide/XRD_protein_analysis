@@ -63,7 +63,7 @@ class SequenceAnalysis():
         return value
 
 class ProteinProperties(SequenceAnalysis):
-    """This class calculates various ratios of amino acids for the protein sequence"""
+    """This class calculates various ratios and theoretical properties of the given protein sequence"""
 
     def __init__(self):
         super().__init__()
