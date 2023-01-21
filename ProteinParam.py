@@ -104,3 +104,16 @@ class ProteinProperties(SequenceAnalysis):
         sequence = sequence.upper()
         ali_index = float(100*sequence.count('A')/len(sequence) + 2.9*(100*sequence.count('V')/len(sequence)) + 3.9*(100*sequence.count('I')/len(sequence) + 100*sequence.count('L')/len(sequence)))
         return ali_index
+
+    #calculates overall charge at specified pH, **needs some work still
+    def charge_ph(self, sequence, ph=7.0):
+        pka_values = {'D':3.65, 'E':4.25, 'K':10.53, 'R':12.48, 'H':6.0}
+        aa_list = [3.3, 7.7]
+        for i in sequence.upper():
+            if i in pka_values:
+                aa_list.append(pka_values[i])
+        if i in aa_list > ph:
+            
+        above = len([1 for i in aa_list if i > ph])
+        below = len([1 for i in aa_list if i < ph])
+        return above - below
