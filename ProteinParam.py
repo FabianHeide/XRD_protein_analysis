@@ -120,3 +120,4 @@ class ProteinProperties(SequenceAnalysis):
         above = len([1 for i in amino_list if i < ph])
         overall_charge = above-below
         return overall_charge
+        
