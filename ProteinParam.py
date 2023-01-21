@@ -122,7 +122,11 @@ class ProteinProperties(SequenceAnalysis):
         return overall_charge
 
 class ProteinMotifs(SequenceAnalysis):
-    """"This class contains methods for finding certain structure, glycosylation or ligand binding motifs in the protein sequence"""
+    """
+    This class contains methods for finding certain structure, glycosylation or ligand binding motifs in the protein 
+    sequence. Predictions are purely theoretical and it should be noted that sequence motifs can occur randomly. Also, 
+    this list of motifs is by no means exhaustive.
+    """
 
     def __init__(self):
         super().__init__()
