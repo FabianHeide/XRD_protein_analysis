@@ -107,8 +107,8 @@ class ProteinProperties(SequenceAnalysis):
 
     #estimates overall charge at specified pH (theoretical and highly dependent on physicochemical environment)
     def charge_ph(self, sequence, ph=7.0):
-        carboxy_values = {'D':3.65, 'E':4.25}
-        amino_values = {'K':10.53, 'R':12.48, 'H':6.0}
+        carboxy_values = {'D':3.65,'E':4.25}
+        amino_values = {'K':10.53,'R':12.48,'H':6.0}
         carboxy_list = [3.3]
         amino_list = [7.7]
         for i in sequence.upper():
@@ -120,4 +120,27 @@ class ProteinProperties(SequenceAnalysis):
         above = len([1 for i in amino_list if i < ph])
         overall_charge = above-below
         return overall_charge
-        
+
+class ProteinMotifs(SequenceAnalysis):
+    """"This class contains methods for finding certain structure, glycosylation or ligand binding motifs in the protein sequence"""
+
+    def __init__(self):
+        super().__init__()
+
+    #checks sequence for absence (0) or presence (1) of Cardin-Weintraub motif (heparin binding motif) 
+    def cardin_weintraub(self, sequence):
+        basic_res = ['R','K','H']
+        hpho_res = ['A','G','I','L','V','Y']
+        seq_mod =[]
+        for i in sequence.upper():
+            if i in basic_res:
+                seq_mod.append('B')
+            else:
+                seq_mod.append('X')
+        if 'XBBXBX' in ''.join(str(i) for i in seq_mod) or 'XBXBBX' in ''.join(str(i) for i in seq_mod):
+            motif = 1
+        elif 'XBBBXXBX' in ''.join(str(i) for i in seq_mod) or 'XBXXBBBX' in ''.join(str(i) for i in seq_mod):
+            motif = 1
+        else:
+            motif = 0          
+        return motif         
