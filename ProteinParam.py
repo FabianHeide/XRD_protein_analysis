@@ -22,19 +22,19 @@ class SequenceAnalysis():
         sequence = sequence.upper()
         return len(sequence)
 
-    def hphobic_res(self, sequence):
+    def hydrophobic_res(self, sequence):
         pho_value = 0
         sequence = sequence.upper()
         for i in sequence:
-            if i in hpho_res and i in amino_acids:
+            if i in hpho_res:
                 pho_value += 1    
         return pho_value
 
-    def hphilic_res(self, sequence):
+    def hydrophilic_res(self, sequence):
         value = 0
         sequence = sequence.upper()
         for i in sequence:
-            if i in hphi_res and i in amino_acids:
+            if i in hphi_res:
                 value += 1     
         return value
 
@@ -42,7 +42,7 @@ class SequenceAnalysis():
         value = 0
         sequence = sequence.upper()
         for i in sequence:
-            if i in pos_res and i in amino_acids:
+            if i in pos_res:
                 value += 1     
         return value
 
@@ -50,7 +50,7 @@ class SequenceAnalysis():
         value = 0
         sequence = sequence.upper()
         for i in sequence:
-            if i in neg_res and i in amino_acids:
+            if i in neg_res:
                 value += 1     
         return value
 
@@ -58,7 +58,7 @@ class SequenceAnalysis():
         value = 0
         sequence = sequence.upper()
         for i in sequence:
-            if i in aro_res and i in amino_acids:
+            if i in aro_res:
                 value += 1     
         return value
 
@@ -88,7 +88,7 @@ class ProteinProperties(SequenceAnalysis):
         return ratio
 
     #calculates the aromatic ratio of the entire sequence
-    def aro_ratio(self, sequence):
+    def aromatic_ratio(self, sequence):
         aro_res = self.aromatic_res(sequence)
         ratio = float(aro_res/len(sequence))
         return ratio
@@ -127,11 +127,10 @@ class ProteinMotifs(SequenceAnalysis):
     def __init__(self):
         super().__init__()
 
-    #checks sequence for absence (0) or presence (1) of Cardin-Weintraub motif (heparin binding motif) 
+    #checks sequence for absence (0) or presence (1) of Cardin-Weintraub motif (heparin binding motif)
     def cardin_weintraub(self, sequence):
         basic_res = ['R','K','H']
-        hpho_res = ['A','G','I','L','V','Y']
-        seq_mod =[]
+        seq_mod = []
         for i in sequence.upper():
             if i in basic_res:
                 seq_mod.append('B')
@@ -142,5 +141,5 @@ class ProteinMotifs(SequenceAnalysis):
         elif 'XBBBXXBX' in ''.join(str(i) for i in seq_mod) or 'XBXXBBBX' in ''.join(str(i) for i in seq_mod):
             motif = 1
         else:
-            motif = 0          
-        return motif         
+            motif = 0
+        return motif
