@@ -70,20 +70,20 @@ class ProteinProperties(SequenceAnalysis):
 
     #calculates the hydrophobic ratio of the entire sequence
     def hydrophobic_ratio(self, sequence):
-        hphobic_res = self.hphobic_res(sequence)
+        hphobic_res = self.hydrophobic_res(sequence)
         ratio = float(hphobic_res/len(sequence))
         return ratio
 
     #calculates the hydrophilic ratio of the entire sequence
     def hydrophilic_ratio(self, sequence):
-        hphilic_res = self.hphilic_res(sequence)
+        hphilic_res = self.hydrophilic_res(sequence)
         ratio = float(hphilic_res/len(sequence))
         return ratio
 
     #calculates the hydrophobic/hydrophilic ratio of the sequence
     def hydro_ratio(self, sequence):
-        hphobic_res = self.hphobic_res(sequence)
-        hphilic_res = self.hphilic_res(sequence)
+        hphobic_res = self.hydrophobic_res(sequence)
+        hphilic_res = self.hydrophilic_res(sequence)
         ratio = float(hphobic_res/hphilic_res)
         return ratio
 
