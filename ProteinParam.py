@@ -121,6 +121,17 @@ class ProteinProperties(SequenceAnalysis):
         overall_charge = above-below
         return overall_charge
 
+    #calculates the MW in Daltons for sequence
+    def molecular_weight(self, sequence):
+        amino_acid_weights = {'A':89.09, 'C':121.16, 'D':133.1, 'E':147.13, 'F':165.19, 'G':75.07, 'H':155.16, 
+                                'I':131.18, 'K':146.19, 'L':131.18, 'M':149.21, 'N':132.12, 'P':115.13, 'Q':146.15,
+                                'R':174.2, 'S':105.09, 'T':119.12, 'V':117.15, 'W':204.23, 'Y':181.19}
+        mw = 16.02 - (18.02*(len(sequence)-1))
+        for i in sequence.upper():
+            if i in amino_acid_weights:
+                mw += amino_acid_weights[i]
+        return mw
+
 class ProteinMotifs(SequenceAnalysis):
     """
     This class contains methods for finding certain structure, glycosylation or ligand binding motifs in the protein 
