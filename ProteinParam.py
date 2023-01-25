@@ -158,3 +158,20 @@ class ProteinMotifs(SequenceAnalysis):
         else:
             motif = 0
         return motif
+
+    #checks sequence for the any N-glycosylation patterns
+    def n_glycosylation(self, sequence):
+        x_residues = ['A','R','D','C','Q','E','G','H','I','L','K','M','F','O','W','Y','V']
+        motif_seq = ['NXS','NXT','NSS','NTS','NST','NTT']
+        seq_mod = []
+        for i in sequence.upper():
+            if i in x_residues:
+                seq_mod.append('X')
+            else:
+                seq_mod.append(i)
+        if i in ''.join(str(i) for i in motif_seq):
+            motif = 1
+        else:
+            motif = 0
+        return motif
+        
