@@ -208,6 +208,7 @@ class ProteinMotifs(SequenceAnalysis):
             motif = 0
         return motif
 
+    #counts the number of N-glycosylation patterns
     def n_glycosylation_number(self, sequence):
         x_residues = ['A','R','D','C','Q','E','G','H','I','L','K','M','F','O','W','Y','V']
         motif_seq = ['NXS','NXT','NSS','NTS','NST','NTT']
