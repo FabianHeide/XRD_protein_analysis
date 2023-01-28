@@ -61,7 +61,16 @@ class SequenceAnalysis():
             if i in aro_res:
                 value += 1     
         return value
-
+    
+    #counts number of cysteine residues
+    def cysteine_res(self, sequence):
+        value = 0
+        sequence = sequence.upper()
+        for i in sequence:
+            if i == 'C':
+                value += 1
+        return value        
+    
 class ProteinProperties(SequenceAnalysis):
     """This class calculates various ratios and theoretical properties of the given protein sequence"""
 
@@ -142,15 +151,18 @@ class ProteinMotifs(SequenceAnalysis):
     def __init__(self):
         super().__init__()
 
-    #checks sequence for absence (0) or presence (1) of Cardin-Weintraub motif (heparin binding motif)
+    #checks sequence for absence (0) or presence (1) of Cardin-Weintraub motif (heparin binding motif based on Cardin and Weintraub 1989)
     def cardin_weintraub(self, sequence):
         basic_res = ['R','K','H']
         seq_mod = []
         for i in sequence.upper():
             if i in basic_res:
                 seq_mod.append('B')
-            else:
+            elif i in hpho_res:
                 seq_mod.append('X')
+            else:
+                seq_mod.append('Y')
+
         if 'XBBXBX' in ''.join(str(i) for i in seq_mod) or 'XBXBBX' in ''.join(str(i) for i in seq_mod):
             motif = 1
         elif 'XBBBXXBX' in ''.join(str(i) for i in seq_mod) or 'XBXXBBBX' in ''.join(str(i) for i in seq_mod):
@@ -158,6 +170,27 @@ class ProteinMotifs(SequenceAnalysis):
         else:
             motif = 0
         return motif
+
+    #counts number of specific Cardin-Weintraub motifs (heparin binding motif based on Cardin and Weintraub 1989)
+    def cardin_weintraub_number(self, sequence):
+        basic_res = ['R','K','H']
+        seq_mod = []
+        cw_number = 0
+        for i in sequence.upper():
+            if i in basic_res:
+                seq_mod.append('B')
+            elif i in hpho_res:
+                seq_mod.append('X')
+            else:
+                seq_mod.append('Y')
+
+        if 'XBBXBX' in ''.join(str(i) for i in seq_mod) or 'XBXBBX' in ''.join(str(i) for i in seq_mod):
+            cw_number += 1
+        elif 'XBBBXXBX' in ''.join(str(i) for i in seq_mod) or 'XBXXBBBX' in ''.join(str(i) for i in seq_mod):
+            cw_number += 1
+        else:
+            pass
+        return cw_number
 
     #checks sequence for the any N-glycosylation patterns
     def n_glycosylation(self, sequence):
