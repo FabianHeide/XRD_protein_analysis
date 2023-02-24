@@ -13,6 +13,10 @@ me. This includes inquiries on the written code and any suggestions for potentia
 
 Required Python packages:
 
+glob
+os
+numpy
 pandas
 biopython
-bokeh
+matplotlib
+seaborn
